@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> newsTitles = new ArrayList<>();
     ArrayList<String> newsContent = new ArrayList<>();
 
+    final String WEATHER_API_KEY = "";
+    final String NEWS_ACCESS_KEY = "";
+
     public void setTextViewWeatherMain(String weatherMain) {
         this.textViewWeatherMain.setText(weatherMain);
     }
@@ -74,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         localDateTime = LocalDateTime.now();
-
-
 
         findViews();
         getDeviceLocation();
@@ -102,14 +103,8 @@ public class MainActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
-
         NewsDownloadTask task = new NewsDownloadTask();
-        task.execute("http://api.mediastack.com/v1/news?access_key=8a11f200718e0d8fabd962beeab7e13e&languages=en&sources=bbc");
-
-//        getWeatherData();
-
-
-
+        task.execute("http://api.mediastack.com/v1/news?access_key=" + NEWS_ACCESS_KEY +"&languages=en&sources=bbc");
     }
 
     public void setGreeting() {
@@ -157,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
         String deviceLongitudeNumFormatted = String.valueOf(deviceLongitudeNum);
         String deviceLatitudeNumFormatted = String.valueOf(deviceLatitudeNum);
 
-        Log.i("api string inside getWeatherData", "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitudeNumFormatted+"&lon="+deviceLongitudeNumFormatted+"&appid=0f46cad5db2d5a3d270ea221ef07f373");
+//        Log.i("api string inside getWeatherData", "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitudeNumFormatted+"&lon="+deviceLongitudeNumFormatted+"&appid=" + WEATHER_API_KEY);
 
-        String weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitudeNumFormatted+"&lon="+deviceLongitudeNumFormatted+"&appid=0f46cad5db2d5a3d270ea221ef07f373";
+        String weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitudeNumFormatted+"&lon="+deviceLongitudeNumFormatted+"&appid=" + WEATHER_API_KEY;
         task.execute(weatherApiUrl);
     }
 
