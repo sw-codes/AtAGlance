@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> newsTitles = new ArrayList<>();
     ArrayList<String> newsContent = new ArrayList<>();
 
-    final String WEATHER_API_KEY = "0f46cad5db2d5a3d270ea221ef07f373";
-    final String NEWS_ACCESS_KEY = "f2bbf81cb5054d6989d8cdc1822b3dc9";
+    final String WEATHER_API_KEY = "";
+    final String NEWS_ACCESS_KEY = "";
 
     public void setTextViewWeatherMain(String weatherMain) {
         this.textViewWeatherMain.setText(weatherMain);
