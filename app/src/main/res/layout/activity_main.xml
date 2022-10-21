@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -12,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="15dp"
         app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,13 +29,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:textSize="28sp"
+                android:textStyle="bold"
                 tools:text="greeting message" />
 
             <TextView
                 android:id="@+id/textViewDayOfWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
                 android:textSize="20sp"
                 tools:text="day of the week" />
         </LinearLayout>
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="15dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
+            android:layout_marginVertical="5dp"
             android:layout_marginLeft="15dp"
             android:gravity="left"
             android:orientation="vertical">
@@ -73,8 +73,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today's local weather is:"
-                android:textSize="20sp" />
+                android:text="Today's weather is:"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewWeatherMain"
@@ -96,9 +97,11 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewNews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="15dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardViewWeather">
@@ -113,12 +116,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Today's news headlines:"
-                android:textSize="20sp" />
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="?android:attr/listDivider" />
 
             <ListView
                 android:id="@+id/listViewNewsArticles"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:minHeight="48dp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

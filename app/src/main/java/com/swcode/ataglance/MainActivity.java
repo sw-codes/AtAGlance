@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> newsTitles = new ArrayList<>();
     ArrayList<String> newsContent = new ArrayList<>();
 
-    final String WEATHER_API_KEY = "";
-    final String NEWS_ACCESS_KEY = "";
+    final String WEATHER_API_KEY = "0f46cad5db2d5a3d270ea221ef07f373";
+    final String NEWS_ACCESS_KEY = "f2bbf81cb5054d6989d8cdc1822b3dc9";
 
     public void setTextViewWeatherMain(String weatherMain) {
         this.textViewWeatherMain.setText(weatherMain);
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Log.i("weather api string", "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitude+"&lon="+deviceLongitude+"&appid=0f46cad5db2d5a3d270ea221ef07f373");
+//        Log.i("weather api string", "https://api.openweathermap.org/data/2.5/weather?lat="+deviceLatitude+"&lon="+deviceLongitude+"&appid=0f46cad5db2d5a3d270ea221ef07f373");
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
+        this.newsTitles.clear();
+        this.newsContent.clear();
         NewsDownloadTask task = new NewsDownloadTask();
-        task.execute("http://api.mediastack.com/v1/news?access_key=" + NEWS_ACCESS_KEY +"&languages=en&sources=bbc");
+        task.execute("http://newsapi.org/v2/top-headlines?language=en&pageSize=10&apiKey=" + NEWS_ACCESS_KEY);
     }
 
     public void setGreeting() {
@@ -131,13 +133,13 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                Log.i("location: ", location.toString());
+//                Log.i("location: ", location.toString());
 
                 deviceLongitude = location.getLongitude();
                 deviceLatitude = location.getLatitude();
 
-                Log.i("longitude", String.valueOf(deviceLongitude));
-                Log.i("latitude", String.valueOf(deviceLatitude));
+//                Log.i("longitude", String.valueOf(deviceLongitude));
+//                Log.i("latitude", String.valueOf(deviceLatitude));
 
                 getWeatherData(location.getLongitude(), location.getLatitude());
             }
@@ -146,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void getWeatherData(Double deviceLongitudeNum, Double deviceLatitudeNum) {
         task = new WeatherDownloadTask();
-        Log.i("deviceLongitudeNum", String.valueOf(deviceLongitudeNum));
-        Log.i("deviceLatitudeNum", String.valueOf(deviceLatitudeNum));
+//        Log.i("deviceLongitudeNum", String.valueOf(deviceLongitudeNum));
+//        Log.i("deviceLatitudeNum", String.valueOf(deviceLatitudeNum));
 
         String deviceLongitudeNumFormatted = String.valueOf(deviceLongitudeNum);
         String deviceLatitudeNumFormatted = String.valueOf(deviceLatitudeNum);
@@ -202,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
             String weatherIconCode = "";
 
-            Log.i("json", s);
+//            Log.i("json", s);
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 String weatherInfo = jsonObject.getString("weather");
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                     setTextViewWeatherDescription(jsonPart.getString("description"));
 
                     weatherIconCode = jsonPart.getString("icon");
-                    Log.i("weather icon code: ", weatherIconCode);
+//                    Log.i("weather icon code: ", weatherIconCode);
 
                     switch (weatherIconCode) {
                         case "04d":
@@ -276,12 +278,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
 
-                String data = jsonObject.getString("data");
-                Log.i("data: ", data);
+//                String data = jsonObject.getString("data");
+//                Log.i("data: ", data);
+                String articles = jsonObject.getString("articles");
+                Log.i("articles: ", articles);
 
-                JSONArray array = new JSONArray(data);
+                JSONArray array = new JSONArray(articles);
                 Log.i("array length: ", String.valueOf(array.length()));
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < array.length(); i++) {
                     JSONObject jsonPart = array.getJSONObject(i);
 
                     Log.i("title: ", jsonPart.getString("title"));
